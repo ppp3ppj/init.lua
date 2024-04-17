@@ -2,8 +2,3 @@
 Prerequisite:
  - Neovim 0.9.0 +
  - [ripgrep](https://github.com/BurntSushi/ripgrep).
-#
-### if use copilot
-
-    :Copilot setup
-
