@@ -7,11 +7,9 @@ function ColorMyPencils(color)
 end
 
 return {
-
     {
         "erikbackman/brightburn.vim",
     },
-
     {
         "folke/tokyonight.nvim",
         lazy = false,
@@ -82,6 +80,7 @@ return {
                     italic = false,
                 },
             })
+            ColorMyPencils()
         end
     },
 
