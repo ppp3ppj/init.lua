@@ -11,6 +11,7 @@ return {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
+
         "elixir-tools/elixir-tools.nvim",
     },
 
@@ -23,8 +24,8 @@ return {
             vim.lsp.protocol.make_client_capabilities(),
             cmp_lsp.default_capabilities())
 
-local elixir = require("elixir")
-local elixirls = require("elixir.elixirls")
+        local elixir = require("elixir")
+        local elixirls = require("elixir.elixirls")
 
         require("fidget").setup({})
         require("mason").setup()
@@ -40,6 +41,21 @@ local elixirls = require("elixir.elixirls")
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities
                     }
+                end,
+
+                tailwindcss = function ()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.tailwindcss.setup({
+                        cmd = { "/home/ppp/.local/share/nvim/mason/bin/tailwindcss-language-server" },
+                        root_dir = lspconfig.util.root_pattern("tailwind.config.js", "assets/tailwind.config.js"),
+                        init_options = {
+                            userLanguages = {
+                              elixir = "html-eex",
+                              eelixir = "html-eex",
+                              heex = "html-eex",
+                            },
+                          },
+                    })
                 end,
 
                 zls = function()
@@ -76,23 +92,17 @@ local elixirls = require("elixir.elixirls")
         })
 
         elixir.setup {
-
-    nextls = {enable = true},
-          elixirls = {
-            enable = true,
-            settings = elixirls.settings {
-              dialyzerEnabled = false,
-              enableTestLenses = false,
-            },
-            on_attach = function(client, bufnr)
-              vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-              vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-              vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-            end,
-          },
-          projectionist = {
-            enable = true
-          }
+            nextls = {enable = true},
+              elixirls = {
+                enable = true,
+                settings = elixirls.settings {
+                  dialyzerEnabled = false,
+                  enableTestLenses = false,
+                },
+              },
+              projectionist = {
+                enable = true
+              }
         }
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
