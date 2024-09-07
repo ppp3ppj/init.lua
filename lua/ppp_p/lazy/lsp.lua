@@ -36,6 +36,12 @@ return {
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities
                     }
+
+					-- https://github.com/neovim/nvim-lspconfig/pull/3232
+                    -- for fix tsserver to ts_ls
+                    if server_name == "tsserver" then
+                        server_name = "ts_ls"
+                    end
                 end,
 
                 zls = function()
