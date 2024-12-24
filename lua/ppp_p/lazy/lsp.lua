@@ -11,9 +11,12 @@ return {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
+        "stevearc/conform.nvim",
     },
 
     config = function()
+        require("conform").setup({ formatters_by_ft = {} })
+
         local cmp = require('cmp')
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
@@ -32,12 +35,11 @@ return {
             },
             handlers = {
                 function(server_name) -- default handler (optional)
-
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities
                     }
 
-					-- https://github.com/neovim/nvim-lspconfig/pull/3232
+                    -- https://github.com/neovim/nvim-lspconfig/pull/3232
                     -- for fix tsserver to ts_ls
                     if server_name == "tsserver" then
                         server_name = "ts_ls"
