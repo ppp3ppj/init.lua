@@ -76,6 +76,35 @@ return {
                         }
                     }
                 end,
+
+                tailwindcss = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.tailwindcss.setup {
+                        settings = {
+                            tailwindCSS = {
+                                classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
+                                includeLanguages = {
+                                    eelixir = "html-eex",
+                                    eruby = "erb",
+                                    htmlangular = "html",
+                                    templ = "html",
+                                    heex = "html-eex",
+                                    elixir = "html-eex",
+                                },
+                                lint = {
+                                    cssConflict = "warning",
+                                    invalidApply = "error",
+                                    invalidConfigPath = "error",
+                                    invalidScreen = "error",
+                                    invalidTailwindDirective = "error",
+                                    invalidVariant = "error",
+                                    recommendedVariantOrder = "warning"
+                                },
+                                validate = true
+                            }
+                        }
+                    }
+                end
             }
         })
 
