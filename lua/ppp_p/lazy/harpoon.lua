@@ -29,7 +29,7 @@ return {
 
         vim.keymap.set("n", "<leader>hc", function() require("harpoon"):list():clear() end)
         vim.keymap.set("n", "<leader>hn", function() require("harpoon"):list():next() end)
-        vim.keymap.set("n", "<leader>hp", function() require("harpoon"):list():prev(4) end)
+        vim.keymap.set("n", "<leader>hp", function() require("harpoon"):list():prev() end)
     end,
     --config = true,
 
