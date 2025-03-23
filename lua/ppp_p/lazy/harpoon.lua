@@ -30,6 +30,13 @@ return {
         vim.keymap.set("n", "<leader>hc", function() require("harpoon"):list():clear() end)
         vim.keymap.set("n", "<leader>hn", function() require("harpoon"):list():next() end)
         vim.keymap.set("n", "<leader>hp", function() require("harpoon"):list():prev() end)
+
+        -- replace
+        vim.keymap.set("n", "<leader><C-h>", function() require("harpoon"):list():replace_at(1) end)
+        vim.keymap.set("n", "<leader><C-t>", function() require("harpoon"):list():replace_at(2) end)
+        vim.keymap.set("n", "<leader><C-n>", function() require("harpoon"):list():replace_at(3) end)
+        vim.keymap.set("n", "<leader><C-s>", function() require("harpoon"):list():replace_at(4) end)
+
     end,
     --config = true,
 
