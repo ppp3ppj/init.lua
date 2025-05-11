@@ -5,7 +5,7 @@ return {
         --
         -- "williamboman/mason.nvim",
         -- "williamboman/mason-lspconfig.nvim",
-        { "mason-org/mason.nvim", version = "^1.0.0" },
+        { "mason-org/mason.nvim",           version = "^1.0.0" },
         { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
@@ -78,6 +78,22 @@ return {
                                 }
                             }
                         }
+                    }
+                end,
+
+                ocamllsp = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.ocamllsp.setup {
+                        manual_install = true,
+                        cmd = { "dune", "tools", "exec", "ocamllsp" },
+                        -- cmd = { "dune", "exec", "ocamllsp" },
+                        settings = {
+                            codelens = { enable = true },
+                            inlayHints = { enable = true },
+                            syntaxDocumentation = { enable = true },
+                        },
+
+                        server_capabilities = { semanticTokensProvider = false },
                     }
                 end,
 
