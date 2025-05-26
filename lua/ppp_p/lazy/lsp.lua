@@ -131,7 +131,7 @@ return {
                     lspconfig.lexical.setup {
                         filetypes = { "elixir", "eelixir", "heex" },
                         -- cmd = { "lexical" },
-                        cmd = { "/home/ppp/.local/share/nvim/mason/bin/lexical", "server" },
+                        cmd = { "/home/pppam/.local/share/nvim/mason/bin/lexical", "server" },
                         root_dir = function(fname) return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or nil end,
                     }
                 end
