@@ -79,3 +79,62 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
+
+-- Emacs windows key binding
+-- C-x 1 -> keep only current window
+vim.keymap.set('n', '<C-x>1', '<C-w>o', { noremap = true })
+-- C-x 0 -> close current window
+vim.keymap.set('n', '<C-x>0', '<C-w>c', { noremap = true })
+-- C-x 2 -> horizontal split
+vim.keymap.set('n', '<C-x>2', '<C-w>s', { noremap = true })
+-- C-x 3 -> vertical split
+vim.keymap.set('n', '<C-x>3', '<C-w>v', { noremap = true })
+
+-- Explicit bindings for clarity
+vim.keymap.set('n', '<C-x>o', '<C-w>w', { noremap = true }) -- next window
+vim.keymap.set('n', '<C-x>O', '<C-w>W', { noremap = true }) -- previous window
+
+-- Swap buffers between current and next/previous window
+local function transpose_buffers(direction)
+  local wins = vim.api.nvim_tabpage_list_wins(0)  -- all windows in current tab
+  if #wins < 2 then
+    return
+  end
+
+  local cur_win = vim.api.nvim_get_current_win()
+  local cur_buf = vim.api.nvim_win_get_buf(cur_win)
+
+  -- find index of current window
+  local cur_idx = nil
+  for i, w in ipairs(wins) do
+    if w == cur_win then
+      cur_idx = i
+      break
+    end
+  end
+
+  if not cur_idx then return end
+
+  -- choose target window index
+  local target_idx
+  if direction == "next" then
+    target_idx = (cur_idx % #wins) + 1
+  else
+    target_idx = (cur_idx - 2 + #wins) % #wins + 1
+  end
+
+  local target_win = wins[target_idx]
+  local target_buf = vim.api.nvim_win_get_buf(target_win)
+
+  -- swap buffers
+  vim.api.nvim_win_set_buf(cur_win, target_buf)
+  vim.api.nvim_win_set_buf(target_win, cur_buf)
+
+  -- move focus to target window
+  vim.api.nvim_set_current_win(target_win)
+end
+
+-- Keymaps (Emacs style)
+vim.keymap.set("n", "<C-x>4t", function() transpose_buffers("next") end, { noremap = true })
+vim.keymap.set("n", "<C-x>4T", function() transpose_buffers("prev") end, { noremap = true })
+
