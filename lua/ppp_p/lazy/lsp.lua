@@ -40,9 +40,9 @@ return {
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
-					require("lspconfig")[server_name].setup({
+                    vim.lsp.config[server_name].setup = {
 						capabilities = capabilities,
-					})
+					}
 
 					-- https://github.com/neovim/nvim-lspconfig/pull/3232
 					-- for fix tsserver to ts_ls
@@ -52,7 +52,7 @@ return {
 				end,
 
 				zls = function()
-					local lspconfig = require("lspconfig")
+					local lspconfig = vim.lsp.config
 					lspconfig.zls.setup({
 						root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
 						settings = {
@@ -68,8 +68,8 @@ return {
 				end,
 
 				["lua_ls"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.lua_ls.setup({
+					local lspconfig = vim.lsp.config
+					lspconfig.lua_ls.setup = {
 						capabilities = capabilities,
 						settings = {
 							Lua = {
@@ -79,12 +79,12 @@ return {
 								},
 							},
 						},
-					})
+					}
 				end,
 
 				ocamllsp = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.ocamllsp.setup({
+					local lspconfig = vim.lsp.config
+					lspconfig.ocamllsp.setup = {
 						manual_install = true,
 						cmd = { "dune", "tools", "exec", "ocamllsp" },
 						-- cmd = { "dune", "exec", "ocamllsp" },
@@ -95,11 +95,11 @@ return {
 						},
 
 						server_capabilities = { semanticTokensProvider = false },
-					})
+					}
 				end,
 
 				tailwindcss = function()
-					local lspconfig = require("lspconfig")
+					local lspconfig = vim.lsp.config
 					lspconfig.tailwindcss.setup({
 						settings = {
 							tailwindCSS = {
@@ -128,8 +128,8 @@ return {
 				end,
 
 				lexical = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.lexical.setup({
+					local lspconfig = vim.lsp.config
+					lspconfig.lexical.setup = {
 						filetypes = { "elixir", "eelixir", "heex" },
 						-- cmd = { "lexical" },
 						-- cmd = { "/home/pppam/.local/share/nvim/mason/bin/lexical", "server" },
@@ -137,7 +137,7 @@ return {
 						root_dir = function(fname)
 							return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or nil
 						end,
-					})
+					}
 				end,
 			},
 		})
