@@ -40,7 +40,7 @@ return {
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
-                    vim.lsp.config[server_name].setup = {
+					vim.lsp.config[server_name].setup = {
 						capabilities = capabilities,
 					}
 
@@ -101,6 +101,7 @@ return {
 				tailwindcss = function()
 					local lspconfig = vim.lsp.config
 					lspconfig.tailwindcss.setup({
+						capabilities = capabilities,
 						settings = {
 							tailwindCSS = {
 								classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
