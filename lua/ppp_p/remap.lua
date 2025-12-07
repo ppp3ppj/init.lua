@@ -140,3 +140,8 @@ end
 vim.keymap.set("n", "<C-x>4t", function() transpose_buffers("next") end, { noremap = true })
 vim.keymap.set("n", "<C-x>4T", function() transpose_buffers("prev") end, { noremap = true })
 
+-- Insert datetime
+vim.keymap.set("n", "<leader>D", function()
+  --vim.cmd("normal! a" .. os.date("(%Y%m%d-%H%M%S)"))
+  vim.api.nvim_put({ os.date("(%Y%m%d-%H%M%S)") }, "c", true, true)
+end, { noremap = true, silent = true })
