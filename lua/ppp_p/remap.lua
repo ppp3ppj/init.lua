@@ -143,5 +143,7 @@ vim.keymap.set("n", "<C-x>4T", function() transpose_buffers("prev") end, { norem
 -- Insert datetime
 vim.keymap.set("n", "<leader>D", function()
   --vim.cmd("normal! a" .. os.date("(%Y%m%d-%H%M%S)"))
-  vim.api.nvim_put({ os.date("(%Y%m%d-%H%M%S)") }, "c", true, true)
+  -- Local time not utc
+  -- vim.api.nvim_put({ os.date("(%Y%m%d-%H%M%S)") }, "c", true, true)
+  vim.api.nvim_put({ os.date("!(%Y%m%d-%H%M%S)") }, "c", true, true) -- UTC
 end, { noremap = true, silent = true })
