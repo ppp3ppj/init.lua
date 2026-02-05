@@ -19,6 +19,8 @@ return {
 			},
 		},
 	},
+    --[[
+    -- Remove tressitter sticky scroll
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		after = "nvim-treesitter",
@@ -40,4 +42,5 @@ return {
 			})
 		end,
 	},
+    ]]
 }
