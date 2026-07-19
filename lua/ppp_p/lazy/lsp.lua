@@ -104,6 +104,7 @@ return {
 					}
 				end,
 
+--[[
 				tailwindcss = function()
 					local lspconfig = vim.lsp.config
 					lspconfig.tailwindcss.setup({
@@ -133,6 +134,7 @@ return {
 						},
 					})
 				end,
+                ]]
 
 				lexical = function()
 					local lspconfig = vim.lsp.config
